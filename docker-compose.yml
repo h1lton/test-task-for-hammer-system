@@ -1,0 +1,23 @@
+services:
+  dj:
+    build: .
+    container_name: django
+    env_file:
+      - .env
+    volumes:
+      - .:/usr/src/app
+    ports:
+      - 8000:8000
+    depends_on:
+      - db
+
+  db:
+    image: postgres
+    container_name: db
+    env_file:
+      - .env
+    volumes:
+      - db_data:/var/lib/postgresql/data/
+
+volumes:
+  db_data: null
